@@ -13,14 +13,28 @@ var jstree = function(){
         },
         renderValue: function(el, data) {
 
+            Shiny.unbindAll(el);
+
+            var html;
+            var dependencies = [];
+            if (data === null) {
+              return;
+            } else if (typeof(data) === 'string') {
+              html = data;
+            } else if (typeof(data) === 'object') {
+              html = data.html;
+              dependencies = data.deps;
+            }
+
             $elem = $('#' + el.id);
             $elem.jstree('destroy');
 
-            $elem.html(data);
-
-
+            $elem.html(html);
 
             $(el).jstree({ 'plugins' : ['checkbox', 'search'] });
+
+            Shiny.initializeInputs(el);
+            Shiny.bindAll(el);
         }
       });
 
