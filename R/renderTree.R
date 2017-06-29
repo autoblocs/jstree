@@ -18,6 +18,6 @@ renderTreeJson <- function(expr, env = parent.frame(), quoted = FALSE){
 
     return(function(shinysession, name, ...) {
 
-        func()
+        jsonlite::toJSON(func(), auto_unbox = TRUE)
     })
 }
