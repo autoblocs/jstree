@@ -1,0 +1,10 @@
+Package: jstree
+Type: Package
+Title: Shiny wrapper of jsTree plugin
+Version: 0.0.0.9000
+Authors@R: c(person(given = "Felipe", family = "Santos", email = "info@autoblocs.com", role = c("aut", "cre")))
+Description: Shiny version of jsTree jQuery plugin
+    jsTree provides a flexible and interactive tree structure.
+License: MIT
+Encoding: UTF-8
+LazyData: true
