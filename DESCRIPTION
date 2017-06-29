@@ -5,6 +5,12 @@ Version: 0.0.0.9000
 Authors@R: c(person(given = "Felipe", family = "Santos", email = "info@autoblocs.com", role = c("aut", "cre")))
 Description: Shiny version of jsTree jQuery plugin
     jsTree provides a flexible and interactive tree structure.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    shiny,
+    jsonlite
+URL: https://github.com/autoblocs/jstree
+BugReports: https://github.com/autoblocs/jstree/issues
+RoxygenNote: 6.0.1

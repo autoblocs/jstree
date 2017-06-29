@@ -1,5 +1,9 @@
 .global <- new.env()
 
+#' @importFrom shiny tags
+tags <- shiny::tags
+
+#' @importFrom shiny addResourcePath HTML
 initResourcePaths <- function() {
   if (is.null(.global$loaded)) {
     shiny::addResourcePath(
@@ -10,8 +14,8 @@ initResourcePaths <- function() {
   shiny::HTML("")
 }
 
-# Parse incoming shinyTree input from the client
-#' @importFrom methods loadMethod
+# Parse incoming jstree input from the client
+#' @importFrom shiny registerInputHandler
 .onAttach <- function(libname, pkgname){
   shiny::registerInputHandler("jstree", function(val, shinysession, name){
     jsonToAttr(val)
