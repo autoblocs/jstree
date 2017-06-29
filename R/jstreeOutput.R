@@ -12,7 +12,7 @@ jstreeOutput <- function(outputId, checkbox=FALSE, search=FALSE, search_placehol
             tag_search,
             shiny::tags$script(
                 type="text/javascript",
-                shiny::HTML(paste0("jstree.initSearch('",outputId,"','",search,"');"))))
+                shiny::HTML(paste0("jstreeFun.initSearch('",outputId,"','",search,"');"))))
     }
 
     shiny::tagList(

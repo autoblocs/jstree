@@ -1,4 +1,4 @@
-var jstree = function(){
+var jstreeFun = function(){
 
     var jstreeOutput = new Shiny.OutputBinding();
 
@@ -26,9 +26,18 @@ var jstree = function(){
               dependencies = data.deps;
             }
 
-            var $html = $($.parseHTML(html));
-            // Convert the inner contents to HTML, and pass to renderHtml
-            Shiny.renderHtml($html.html(), el, dependencies);
+            $elem = $('#' + el.id);
+            var plugins = [];
+            if ($elem.data('st-checkbox') === 'TRUE'){
+              plugins.push('checkbox');
+            }
+            if ($elem.data('st-search') === 'TRUE'){
+              plugins.push('search');
+            }
+
+            $elem.jstree('destroy');
+            $elem.html(html);
+            $(el).jstree({ 'plugins' : plugins });
 
             Shiny.initializeInputs(el);
             Shiny.bindAll(el);
@@ -36,7 +45,7 @@ var jstree = function(){
         }
       });
 
-    Shiny.outputBindings.register(jstreeOutput, 'jstree.jstreeOutput');
+    Shiny.outputBindings.register(jstreeOutput, 'jstree.jstreeOutputBinding');
 
     var jstreeInput = new Shiny.InputBinding();
 
@@ -126,7 +135,7 @@ var jstree = function(){
         }
       });
 
-    Shiny.inputBindings.register(jstreeInput);
+    Shiny.inputBindings.register(jstreeInput, 'jstree.jstreeInputBinding');
 
     var exports = {};
 
