@@ -13,32 +13,14 @@ var jstree = function(){
         },
         renderValue: function(el, data) {
 
-          Shiny.unbindAll(el);
+            $elem = $('#' + el.id);
+            $elem.jstree('destroy');
 
-          var html;
-          var dependencies = [];
-          if (data === null) {
-              return;
-          } else if (typeof(data) === 'string') {
-              html = data;
-          } else if (typeof(data) === 'object') {
-              html = data.html;
-              dependencies = data.deps;
-          }
+            $elem.html(data);
 
-          var $html = $($.parseHTML(html));
-          // Convert the inner contents to HTML, and pass to renderHtml
-          Shiny.renderHtml($html.html(), el, dependencies);
 
-          // Extract class of wrapper, and add them to the wrapper element
-          el.className = 'shiny-jstree shiny-bound-output ' +
-            $html.attr('class');
 
-          $(el).jstree({ 'plugins' : plugins });
-
-          Shiny.initializeInputs(el);
-          Shiny.bindAll(el);
-
+            $(el).jstree({ 'plugins' : ['checkbox', 'search'] });
         }
       });
 
