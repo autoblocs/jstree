@@ -15,16 +15,7 @@ var jstreeFun = function(){
 
             Shiny.unbindAll(el);
 
-            var html;
-            var dependencies = [];
-            if (data === null) {
-              return;
-            } else if (typeof(data) === 'string') {
-              html = data;
-            } else if (typeof(data) === 'object') {
-              html = data.html;
-              dependencies = data.deps;
-            }
+            console.log(JSON.stringify(data));
 
             var plugins = [];
             if ($(el).data('st-checkbox') === 'TRUE'){
@@ -34,13 +25,19 @@ var jstreeFun = function(){
               plugins.push('search');
             }
 
-            $(el).jstree('destroy');
-            $(el).html(html);
-            $(el).jstree({ 'plugins' : plugins });
+            if(typeof($(el).jstree('is_loaded')) === 'object'){
+                $(el).jstree({ 'core' : {
+                    'data': [data] ,
+                    'check_callback' : true
+                },
+                'plugins' : plugins });
+            }else{
+                $(el).jstree(true).settings.core.data = data;
+                $(el).jstree(true).refresh();
+            }
 
             Shiny.initializeInputs(el);
             Shiny.bindAll(el);
-
         }
     });
 
