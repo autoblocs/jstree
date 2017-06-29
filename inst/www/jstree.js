@@ -30,13 +30,9 @@ var jstree = function(){
             // Convert the inner contents to HTML, and pass to renderHtml
             Shiny.renderHtml($html.html(), el, dependencies);
 
-            //$elem = $('#' + el.id);
-            //$elem.jstree('destroy');
-            //$elem.html(html);
-            //$(el).jstree({ 'plugins' : ['checkbox', 'search'] });
-
             Shiny.initializeInputs(el);
             Shiny.bindAll(el);
+
         }
       });
 
