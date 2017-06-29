@@ -1,14 +1,5 @@
 #' @export
-setNode <- function(x = "", sticon = NULL, stselected = FALSE, stdisabled = FALSE,
-                    stopened = FALSE){
-
-    structure(x, sticon = sticon, stselected = stselected, stdisabled = stdisabled,
-              stopened = stopened)
-
-}
-
-#' @export
-setNodeJson <- function(x, children = list(), icon = NULL,
+setNode <- function(x, children = list(), icon = NULL,
                         stopened = FALSE, stselected = FALSE, stdisabled = FALSE){
     list(
         text = x,
