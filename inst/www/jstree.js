@@ -15,8 +15,20 @@ var jstree = function(){
 
           Shiny.unbindAll(el);
 
-          $elem = $('#' + el.id);
-          $elem.html(data);
+          var html;
+          var dependencies = [];
+          if (data === null) {
+              return;
+          } else if (typeof(data) === 'string') {
+              html = data;
+          } else if (typeof(data) === 'object') {
+              html = data.html;
+              dependencies = data.deps;
+          }
+
+          var $html = $($.parseHTML(html));
+          // Convert the inner contents to HTML, and pass to renderHtml
+          Shiny.renderHtml($html.html(), el, dependencies);
 
           var plugins = [];
           if ($elem.data('st-checkbox') === 'TRUE'){
@@ -26,10 +38,14 @@ var jstree = function(){
             plugins.push('search');
           }
 
-          var tree = $(el).jstree({'plugins' : plugins});
+          // Extract class of wrapper, and add them to the wrapper element
+          el.className = 'shiny-jstree shiny-bound-output ' +
+            $html.attr('class');
 
           Shiny.initializeInputs(el);
           Shiny.bindAll(el);
+
+          $('#' + el.id).jstree({ 'plugins' : plugins });
         }
       });
 
