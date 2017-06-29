@@ -26,24 +26,23 @@ var jstreeFun = function(){
               dependencies = data.deps;
             }
 
-            $elem = $('#' + el.id);
             var plugins = [];
-            if ($elem.data('st-checkbox') === 'TRUE'){
+            if ($(el).data('st-checkbox') === 'TRUE'){
               plugins.push('checkbox');
             }
-            if ($elem.data('st-search') === 'TRUE'){
+            if ($(el).data('st-search') === 'TRUE'){
               plugins.push('search');
             }
 
-            $elem.jstree('destroy');
-            $elem.html(html);
+            $(el).jstree('destroy');
+            $(el).html(html);
             $(el).jstree({ 'plugins' : plugins });
 
             Shiny.initializeInputs(el);
             Shiny.bindAll(el);
 
         }
-      });
+    });
 
     Shiny.outputBindings.register(jstreeOutput, 'jstree.jstreeOutputBinding');
 
@@ -133,7 +132,7 @@ var jstreeFun = function(){
         unsubscribe: function(el) {
           $(el).off(".jstree");
         }
-      });
+    });
 
     Shiny.inputBindings.register(jstreeInput, 'jstree.jstreeInputBinding');
 
