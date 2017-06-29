@@ -30,22 +30,15 @@ var jstree = function(){
           // Convert the inner contents to HTML, and pass to renderHtml
           Shiny.renderHtml($html.html(), el, dependencies);
 
-          var plugins = [];
-          if ($elem.data('st-checkbox') === 'TRUE'){
-            plugins.push('checkbox');
-          }
-          if ($elem.data('st-search') === 'TRUE'){
-            plugins.push('search');
-          }
-
           // Extract class of wrapper, and add them to the wrapper element
           el.className = 'shiny-jstree shiny-bound-output ' +
             $html.attr('class');
 
+          $(el).jstree({ 'plugins' : plugins });
+
           Shiny.initializeInputs(el);
           Shiny.bindAll(el);
 
-          $('#' + el.id).jstree({ 'plugins' : plugins });
         }
       });
 
