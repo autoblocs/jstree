@@ -15,8 +15,6 @@ var jstreeFun = function(){
 
             Shiny.unbindAll(el);
 
-            console.log(JSON.stringify(data));
-
             var plugins = [];
             if ($(el).data('st-checkbox') === 'TRUE'){
               plugins.push('checkbox');

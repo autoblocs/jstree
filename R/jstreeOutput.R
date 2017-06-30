@@ -12,7 +12,8 @@ jstreeOutput <- function(outputId, checkbox=FALSE, search=FALSE, search_placehol
     searchEl <- tags$div("")
     if (search == TRUE){
         search <- paste0(outputId, "-search-input")
-        searchEl <- tags$input(id=search, class="form-control", type="text", value="")
+        searchEl <- tags$input(id=search, class="form-control", type="text"
+                               , value="", placeholder = search_placeholder)
     }
     if (is.character(search)){
         # Either the search field we just created or the given text field ID
