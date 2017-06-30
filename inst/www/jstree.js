@@ -123,6 +123,14 @@ var jstreeFun = function(){
           $(el).on("ready.jstree", function(e){
             callback();
           });
+
+          $(el).on("hover_node.jstree", function(e){
+            callback();
+          });
+
+          $(el).on("refresh.jstree", function(e){
+            callback();
+          });
         },
         unsubscribe: function(el) {
           $(el).off(".jstree");
