@@ -1,11 +1,12 @@
 .jstree-search {
   font-style: italic !important;
-  color: #337ab7 !important;
+  color: #0075b0 !important;
   font-weight: bold !important;
 }
 
 .jstree-clicked {
-  background-color: #00c0ef !important;
+  background-color: #0075b0 !important;
+  color: #ffffff !important;
 }
 
 .jstree-anchor {
