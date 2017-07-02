@@ -23,24 +23,40 @@ initResourcePaths <- function() {
 }
 
 jsonToAttr <- function(json){
+
+  # message("jstree init :")
+  # message(str(json))
+  # message("")
+
+  if(is.null(json)) return(list())
+  if(length(json) == 0) return(list())
+
   ret <- list()
 
-  if (! "text" %in% names(json)){
-    # This is a top-level list, not a node.
-    for (i in 1:length(json)){
-      ret[[json[[i]]$text]] <- jsonToAttr(json[[i]])
-      ret[[json[[i]]$text]] <- supplementAttr(ret[[json[[i]]$text]], json[[i]])
-    }
-    return(ret)
-  }
+  tryCatch({
 
-  if (length(json$children) > 0){
-    return(jsonToAttr(json[["children"]]))
-  } else {
-    ret <- 0
-    ret <- supplementAttr(ret, json)
-    return(ret)
-  }
+      if (! "text" %in% names(json)){
+          # This is a top-level list, not a node.
+          for (i in 1:length(json)){
+              ret[[json[[i]]$text]] <- jsonToAttr(json[[i]])
+              ret[[json[[i]]$text]] <- supplementAttr(ret[[json[[i]]$text]], json[[i]])
+          }
+          return(ret)
+      }
+
+      if (length(json$children) > 0){
+          return(jsonToAttr(json[["children"]]))
+      } else {
+          ret <- 0
+          ret <- supplementAttr(ret, json)
+          return(ret)
+      }
+
+  }, error = function(e){
+      message(e)
+  })
+
+  return(list())
 }
 
 supplementAttr <- function(ret, json){
